@@ -1,20 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
+import { useColorScheme,StyleSheet } from 'react-native';
+import { NavigationContainer, DarkTheme, DefaultTheme } from '@react-navigation/native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import StackFlow from './navigation/StackFlow';
+import TabsFlow from './navigation/TabsFlow';
+import DrawerFlow from './navigation/DrawerFlow';
+const ActiveNavigator = StackFlow;
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+const isDark = useColorScheme() === 'dark';
+return (
+<GestureHandlerRootView style={{ flex: 1 }}>
+<SafeAreaProvider>
+<NavigationContainer theme={isDark ? DarkTheme : DefaultTheme}>
+<ActiveNavigator />
+</NavigationContainer>
+</SafeAreaProvider>
+</GestureHandlerRootView>
+);
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#495E57',
   },
+  content:{
+    flex:1
+  },
+  text: {
+    color: '#333333',
+  },
+  scroll: {
+    flex: 1,
+    backgroundColor: '#EDEFEE',
+  },
+  scrollContent: {
+    paddingBottom: 20,
+  }
 });
